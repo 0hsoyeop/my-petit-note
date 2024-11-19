@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Petit Note</title>
+</head>
+
+<body>
+    <h3>Notes</h3>
+
+    <div id="notesContainer"></div>
+    <button id="addBtn">Add</button>
+
+    <script>
+        const addBtn = document.getElementById("addBtn");
+        const notesContainer = document.getElementById("notesContainer");
+        const notes = JSON.parse(localStorage.getItem("notes"));
+
+        if (notes == null) {
+            console.log("Empty.");
+        } else {
+            let x = notes.length;
+            for (let i = 0; i < x; i++) {
+                const div = document.createElement("div");
+                const h4 = document.createElement("h4");
+                const p = document.createElement("p");
+
+                div.addEventListener("mouseenter", function () {
+                    div.style.cursor = "pointer";
+                });
+
+                div.addEventListener("click", function () {
+                    // 선택한 노트 정보를 브라우저 로컬 스토리지에 저장한다.
+                    localStorage.setItem("selectedNote", i);
+                    window.location.href = "detail.html";
+                });
+
+                h4.innerText = notes[i].title;
+                p.innerText = notes[i].content;
+
+                // div > h4 , p
+                notesContainer.appendChild(div);
+                div.appendChild(h4);
+                div.appendChild(p);
+            }
+        }
+
+        addBtn.addEventListener("click", function () {
+            window.location.href = "write.html";
+        });
+
+    </script>
+</body>
+
+</html>

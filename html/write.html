@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Petit Note</title>
+    <link rel="stylesheet" href="C:\study\my-petit-note\css\main.css">
+</head>
+
+<body>
+    <div>
+        <h3>New note</h3>
+        <form>
+            <div class="form-group">
+                <label class="label" for="title">Title</label>
+                <input class="input" type="text" id="title" maxlength="30" required>
+                <label class="label" for="content">Content</label>
+                <input class="input" type="text" id="content" required>
+            </div>
+            <button id="saveBtn" type="submit">Save</button>
+        </form>
+        <button id="backBtn">Back</button>
+    </div>
+    <script>
+        const saveBtn = document.getElementById("saveBtn");
+        const backBtn = document.getElementById("backBtn");
+        const titleInput = document.getElementById("title");
+        const contentInput = document.getElementById("content");
+
+        const MAX_TITLE_LENGTH = 30;
+        const MAX_CONTENT_LENGTH = 100;
+
+        // 노트를 저장한다. 
+        function saveNote() {
+            const title = titleInput.value.trim();
+            const content = contentInput.value.trim();
+
+            const now = new Date();
+
+            if (title == undefined || content == undefined) {
+                alert("제목과 글을 작성해주세요.");
+                return;
+
+            }
+
+            if (title.length > MAX_TITLE_LENGTH || content.length > MAX_CONTENT_LENGTH) {
+                alert("제목 또는 글이 너무 길어요.");
+                return;
+            }
+
+            // 전체 노트 목록을 저장할 Array
+            let notes;
+            if (localStorage.getItem("notes") == null) {
+                notes = [];
+            } else {
+                notes = JSON.parse(localStorage.getItem("notes"));
+            }
+
+            // 새로운 노트 객체를 만든다. 
+            const note = {
+                title: title,
+                content: content
+            };
+
+            notes.push(note);
+
+            // 로컬 스토리지에 저장
+            localStorage.setItem("notes", JSON.stringify(notes));
+            window.location.href = "index.html";
+        }
+
+        saveBtn.addEventListener("click", function (e) {
+            e.preventDefault();  // 기본 폼 제출을 방지한다.
+            saveNote();
+        });
+
+        backBtn.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+
+</html>

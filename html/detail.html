@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Petit Note</title>
+    <link rel="stylesheet" href="C:\study\my-petit-note\css\main.css">
+</head>
+
+<body>
+    <div>
+        <h3>New note</h3>
+        <form>
+            <div class="form-group">
+                <label class="label" for="title">Title</label>
+                <input class="input" type="text" id="title" maxlength="30" required>
+                <label class="label" for="content">Content</label>
+                <input class="input" type="text" id="content" required>
+            </div>
+            <button id="editBtn" type="submit">Save</button>
+            <button id="deleteBtn" type="submit">Delete</button>
+        </form>
+        <button id="backBtn">Back</button>
+    </div>
+    <script>
+        const titleInput = document.getElementById("title");
+        const contentInput = document.getElementById("content");
+
+        const backBtn = document.getElementById("backBtn");
+        const editBtn = document.getElementById("editBtn");
+        const deleteBtn = document.getElementById("deleteBtn");
+
+        const notes = JSON.parse(localStorage.getItem("notes"));
+        const selectedNote = JSON.parse(localStorage.getItem("selectedNote"));
+
+        // 제목, 내용 불러오기
+        titleInput.value = notes[selectedNote].title;
+        contentInput.value = notes[selectedNote].content;
+
+        // Back 버튼 클릭
+        backBtn.addEventListener("click", function () {
+            window.location.href = "index.html";
+        });
+
+        editBtn.addEventListener("click", function() {
+            const note = {
+                title: titleInput.value,
+                content: contentInput.value
+            };
+
+            notes[selectedNote] = note;
+
+            // 로컬 스토리지에 Notes를 업데이트한다.
+            localStorage.setItem("notes", JSON.stringify(notes));
+        });
+
+        // Delete 버튼 클릭 이벤트
+        deleteBtn.addEventListener("click", function(e) {
+            e.preventDefault(); // 기본 폼 제출 동작 방지
+            const isConfirmed = confirm("노트를 삭제할까요?");
+
+            if (isConfirmed == true) {
+                localStorage.removeItem("selectedNote");
+                notes.pop(selectedNote);
+                localStorage.setItem("notes", JSON.stringify(notes));
+                window.location.href = "index.html";
+            } else {
+                return;
+            }
+        });
+
+    </script>
+</body>
+
+</html>

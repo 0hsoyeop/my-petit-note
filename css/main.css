@@ -1,0 +1,12 @@
+.form-group {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.label {
+    display: block;
+}
+
+.input {
+    width: 300px;
+}
