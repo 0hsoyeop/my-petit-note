@@ -1,6 +1,24 @@
+.main-content {
+    margin: 10px;
+}
+
+.main-title {
+    margin: 10px;
+}
+
+.card {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 .form-group {
     flex-direction: column;
     gap: 10px;
+    margin: 10px;
+}
+
+.button-group {
+    margin: 10px;
 }
 
 .label {
