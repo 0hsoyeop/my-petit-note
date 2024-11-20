@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Petit Note</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <div class="main-content">
+        <h3 class="fw-bold main-title">Notes</h3>
+
+        <div id="notesContainer" class="form-group"></div>
+        <div class="button-group">
+            <button id="addBtn" class="btn btn-primary">Add</button>
+        </div>
+    </div>
+
+    <script>
+        const addBtn = document.getElementById("addBtn");
+        const notesContainer = document.getElementById("notesContainer");
+        const notes = JSON.parse(localStorage.getItem("notes"));
+
+        if (notes == null) {
+            console.log("Empty.");
+        } else {
+            let x = notes.length;
+            for (let i = 0; i < x; i++) {
+                const outerDiv = document.createElement("div");
+                const innerDiv = document.createElement("div");
+                const thumbnailDiv = document.createElement("div");
+                const h4 = document.createElement("h4");
+                const p = document.createElement("p");
+                const img = document.createElement("img");
+
+                outerDiv.setAttribute("class", "card");
+                outerDiv.addEventListener("mouseenter", function () {
+                    outerDiv.style.cursor = "pointer";
+                });
+
+                outerDiv.addEventListener("click", function () {
+                    // 선택한 노트 정보를 브라우저 로컬 스토리지에 저장한다.
+                    localStorage.setItem("selectedNote", i);
+                    window.location.href = "/detail";
+                });
+
+                innerDiv.setAttribute("class", "card-body");
+                h4.setAttribute("class", "fs-5 fw-semibold");
+                p.setAttribute("class", "fs-6");
+                h4.innerText = notes[i].title;
+                p.innerText = notes[i].content;
+
+                thumbnailDiv.setAttribute("class", "card-img");
+                img.src = atob(notes[i].image);
+
+                // div > h4 , p
+                notesContainer.appendChild(outerDiv);
+                outerDiv.appendChild(innerDiv);
+                innerDiv.appendChild(h4);
+                innerDiv.appendChild(p);
+                innerDiv.appendChild(thumbnailDiv);
+                thumbnailDiv.appendChild(img);
+            }
+        }
+
+        // Add 버튼을 클릭하면 글쓰기 페이지로 이동한다.
+        addBtn.addEventListener("click", function () {
+            window.location.href = "/write";
+        });
+
+    </script>
+</body>
+
+</html>

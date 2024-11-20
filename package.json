@@ -1,0 +1,16 @@
+{
+  "name": "my-petit-note",
+  "version": "1.0.0",
+  "description": "---\r * 참고: <a href=\"https://velog.io/@eunjin/Javascript-%EB%85%B8%ED%8A%B8%EC%95%B1-%EB%A7%8C%EB%93%A4%EA%B8%B0\">Notes App 노트앱 만들기 토이프로젝트</a>\r * 개발 기간: 2024-11-19 (1일)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1"
+  }
+}
