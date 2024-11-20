@@ -32,9 +32,10 @@
             for (let i = 0; i < x; i++) {
                 const outerDiv = document.createElement("div");
                 const innerDiv = document.createElement("div");
+                const thumbnailDiv = document.createElement("div");
                 const h4 = document.createElement("h4");
                 const p = document.createElement("p");
-
+                const img = document.createElement("img");
 
                 outerDiv.setAttribute("class", "card");
                 outerDiv.addEventListener("mouseenter", function () {
@@ -53,11 +54,16 @@
                 h4.innerText = notes[i].title;
                 p.innerText = notes[i].content;
 
+                thumbnailDiv.setAttribute("class", "card-img");
+                img.src = atob(notes[i].image);
+
                 // div > h4 , p
                 notesContainer.appendChild(outerDiv);
                 outerDiv.appendChild(innerDiv);
                 innerDiv.appendChild(h4);
                 innerDiv.appendChild(p);
+                innerDiv.appendChild(thumbnailDiv);
+                thumbnailDiv.appendChild(img);
             }
         }
 
