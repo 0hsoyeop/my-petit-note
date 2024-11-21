@@ -12,6 +12,11 @@ app.get('/', (req, res) => { res.sendFile(__dirname + '/public/index.html'); });
 app.get("/write", (req, res) => { res.sendFile(__dirname + '/public/write.html') });
 app.get("/detail", (req, res) => { res.sendFile(__dirname + '/public/detail.html') });
 
+// - 404 처리
+app.get("*", (req, res) => {
+    res.status(400).sendFile(__dirname + '/public/404.html');
+});
+
 // MySQL
 require('dotenv').config();
 const mysql = require("mysql");
