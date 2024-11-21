@@ -13,12 +13,13 @@ app.get("/write", (req, res) => { res.sendFile(__dirname + '/public/write.html')
 app.get("/detail", (req, res) => { res.sendFile(__dirname + '/public/detail.html') });
 
 // MySQL
+require('dotenv').config();
 const mysql = require("mysql");
 const connection = mysql.createConnection({
-    host: '172.25.161.119',
-    user: '< MySQL username >',
-    password: '< MySQL password >',
-    database: 'my_petit_note'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
 });
 
 connection.connect();
