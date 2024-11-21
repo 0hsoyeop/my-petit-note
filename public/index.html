@@ -13,7 +13,10 @@
 
     <div class="main-content">
         <h3 class="fw-bold main-title">Notes</h3>
-
+        <div class="search-area">
+            <input id="searchInput" class="form-control" placeholder="검색어를 입력하세요"></input>
+            <button id="searchBtn" class="btn btn-secondary">Search</button>
+        </div>
         <div id="notesContainer" class="form-group"></div>
         <div class="button-group">
             <button id="addBtn" class="btn btn-primary">Add</button>
@@ -22,7 +25,9 @@
 
     <script>
         const addBtn = document.getElementById("addBtn");
+        const searchBtn = document.getElementById("searchBtn");
         const notesContainer = document.getElementById("notesContainer");
+        const searchInput = document.getElementById("searchInput");
         const notes = JSON.parse(localStorage.getItem("notes"));
 
         if (notes == null) {
@@ -70,6 +75,21 @@
         // Add 버튼을 클릭하면 글쓰기 페이지로 이동한다.
         addBtn.addEventListener("click", function () {
             window.location.href = "/write";
+        });
+
+        // Search 버튼을 클릭할 경우
+        searchBtn.addEventListener("click", function () {
+            const originalString = searchInput.value;
+            const trimedString = originalString.split(" ").join("");
+
+            console.log(trimedString);
+            if (trimedString.length == 0) {
+                alert("검색어를 입력하세요.");
+                return;
+            }
+
+            // TODO - 검색 기능 구현
+            alert(searchInput.value);
         });
 
     </script>

@@ -54,3 +54,13 @@
     overflow: hidden;
     object-fit: cover;
 }
+
+.search-area {
+    margin: 10px;
+    gap: 10px;
+    display: flex;
+}
+
+.form-control {
+    flex: 1;
+}
