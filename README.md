@@ -10,6 +10,9 @@
 * Javascript로 HTML 요소 생성, 속성 변경하기
 * Javascript로 로컬 스토리지 사용하기
 * Bootstrap 사용하기
+* Node.js 사용해보기
+* Node.js 와 MySQL 연동하기
+* Node.js 로 MySQL 데이터 조회하기
 
 ### 구현 기능
 
