@@ -1,4 +1,7 @@
 
+### 2024/11/22
+* DB 데이터 조회 추가
+
 ### 2024/11/21
 * MySQL 연동
 * 404 이미지 출처 : https://www.freepik.com/free-vector/oops-404-error-with-broken-robot-concept-illustration_7906233.htm#fromView=search&page=6&position=1&uuid=826da24e-40a2-470d-b8ac-1753fa97c45a 

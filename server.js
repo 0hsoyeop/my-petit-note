@@ -1,37 +1,14 @@
 const express = require("express");
 const app = express();
-const port = 3100;
+const port = 4500;
+const routes = require("./routes/routes");
+const db = require("./config/db");
 
 app.listen(port, () => { console.log(`서버가 http://localhost:${port}에서 실행 중입니다.`) });
 
 // 정적 자원
-app.use(express.static("public"));
+app.use(express.static("public", { index : false }));
 
-// 라우트
-app.get('/', (req, res) => { res.sendFile(__dirname + '/public/index.html'); });
-app.get("/write", (req, res) => { res.sendFile(__dirname + '/public/write.html') });
-app.get("/detail", (req, res) => { res.sendFile(__dirname + '/public/detail.html') });
+// 라우터 등록
+app.use("/", routes); // 모든 요청을 routes.js로 처리하도록 등록
 
-// - 404 처리
-app.get("*", (req, res) => {
-    res.status(400).sendFile(__dirname + '/public/404.html');
-});
-
-// MySQL
-require('dotenv').config();
-const mysql = require("mysql");
-const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
-});
-
-connection.connect();
-
-connection.query('SELECT * FROM note', (error, rows, fields) => {
-    if (error) throw error;
-    console.log('Note: ', rows);
-});
-
-connection.end();
